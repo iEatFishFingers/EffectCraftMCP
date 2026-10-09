@@ -2,6 +2,15 @@
 
 Start by running `scripts\verify.bat`. It checks each part of the connection and tells you which part is broken.
 
+## The launcher didn't start EffectCraft
+
+The launcher writes a log to `%LOCALAPPDATA%\EffectCraft-MCP\ec-mcp.log` and to stderr (Claude shows that in its MCP server log). It records when it started the app, when the port opened and why it gave up.
+
+- **"is not installed at ..."**: EffectCraft lives somewhere else. Add `-InstallDir "D:\path\to\EffectCraft"` to the entry's args, or rerun `install-mcp.bat -CliPath "D:\path\effectcraft-cli.exe"`.
+- **"did not open port ... within 90 s"**: the app started but didn't open the control port. Another program may hold the port (`netstat -ano | findstr 9877`), or the window failed to start. Start `effectcraft.exe --control 9877` from a terminal to see its messages, or pick another port with `install-mcp.bat -Port 9878`.
+- **The app opened, but the first call timed out**: the first frame of a big project can take a while. Ask again.
+- **Run `scripts\verify.bat -Deep`** to see the same steps with a clear pass or fail.
+
 ## EffectCraft tools don't appear in Claude at all
 
 **Cause:** the Claude desktop app hasn't loaded the new config entry.
@@ -18,7 +27,7 @@ To check from a chat, ask Claude what state the local MCP servers are in. If `ef
 
 **Cause:** the bridge can't reach the app.
 
-- **EffectCraft was opened from the Start menu or taskbar.** It needs `--control 9877`. Close it and reopen it with the **EffectCraft (Claude)** shortcut or `scripts\launch-effectcraft.bat`.
+- **EffectCraft was opened from the Start menu or taskbar.** It needs `--control 9877`. With the launcher, Claude says so and you just close that window (save first) and ask again: the launcher reopens it with the port. With `-Direct`, reopen it with the **EffectCraft (Claude)** shortcut or `scripts\launch-effectcraft.bat`.
 - **EffectCraft isn't running.** Bridge mode needs the window open.
 - **The ports don't match.** The number after `--control` must be the same as the one after `--bridge`.
 - **Another program is using port 9877.** Run `netstat -ano | findstr 9877` to check. Pick another port and change it in both places (see [setup.md](setup.md#changing-the-port)).

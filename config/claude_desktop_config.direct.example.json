@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "effectcraft": {
+      "command": "C:\Program Files\EffectCraft\effectcraft-cli.exe",
+      "args": ["mcp", "--bridge", "9877"]
+    }
+  }
+}

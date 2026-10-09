@@ -1,8 +1,12 @@
 {
   "mcpServers": {
     "effectcraft": {
-      "command": "C:\\Program Files\\EffectCraft\\effectcraft-cli.exe",
-      "args": ["mcp", "--bridge", "9877"]
+      "command": "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe",
+      "args": [
+        "-NoProfile", "-ExecutionPolicy", "Bypass",
+        "-File", "C:\Users\YOU\AppData\Local\EffectCraft-MCP\ec-mcp.ps1",
+        "-Port", "9877"
+      ]
     }
   }
 }

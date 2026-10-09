@@ -14,6 +14,18 @@ You don't need Rust, Node or Python. The MSI ships the CLI already built.
 
 > On macOS the CLI is a separate download (`effectcraft-cli-<ver>-macos-universal.zip`). On Linux it comes in the same packages as the app.
 
+> **Recommended:** run `scripts\install-mcp.bat`. It does steps 2 and 3 for you and uses the launcher `ec-mcp.ps1`, so step 1 isn't needed: EffectCraft opens itself when Claude first uses it. Below is the manual, **direct bridge** setup (the `-Direct` option), where you start the app yourself. To add the launcher by hand instead, use this entry:
+>
+> ```json
+> "effectcraft": {
+>   "command": "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe",
+>   "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+>            "C:\Users\YOU\AppData\Local\EffectCraft-MCP\ec-mcp.ps1", "-Port", "9877"]
+> }
+> ```
+>
+> For **Claude Code**: `claude mcp add --scope user effectcraft -- powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%LOCALAPPDATA%\EffectCraft-MCP\ec-mcp.ps1" -Port 9877`
+
 ## Step 1: Start EffectCraft with the control port
 
 The bridge connects to a TCP control channel that the app opens only when it's started with `--control <port>`.
