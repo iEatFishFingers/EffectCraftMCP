@@ -1,0 +1,15 @@
+# Your real Claude config (may contain keys for other servers) - never commit it
+claude_desktop_config.json
+*.bak-*
+
+# EffectCraft scratch output from testing
+*.ecproj.autosave
+renders/
+*.mp4
+*.mov
+
+# OS / editor
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
